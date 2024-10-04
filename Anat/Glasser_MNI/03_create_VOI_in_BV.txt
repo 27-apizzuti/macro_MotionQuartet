@@ -1,0 +1,4 @@
+Since BV can't read VMR with more than 255 values, we save two VMR (one per hemisphere) with values from 1-180
+Make Glasser_MNI_RH.txt and Glasser_MNI_LH.txt
+For each hemisphere, 1) load VMR 2) Go to Volumes > Convert VMR/v16 Labels to VOI (inthe menu load the correspondent .txt with names)
+Combine VOIs using OR operation and save 

@@ -9,11 +9,10 @@ print("Hello.")
 
 # =============================================================================
 STUDY_PATH = "D:\\WB-MotionQuartet\\derivatives"
-# SUBJ = ["sub-01", "sub-02", "sub-03", "sub-04", "sub-05", "sub-06", "sub-07", "sub-08", "sub-09", "sub-10", "sub-11"]
 SUBJ = ["sub-01"]
-TASK = ["phy01"]
+TASK = ["rest01"]
 
-HPF_CUTOFF = 0.005
+HPF_CUTOFF = 3
 
 for su in SUBJ:
     
@@ -40,5 +39,5 @@ for su in SUBJ:
 
                 # // High-pass filtering
                 docnii=bv.open(ru)
-                docnii.filter_temporal_highpass_fft(HPF_CUTOFF,'Hz')
+                docnii.filter_temporal_highpass_glm_fourier(HPF_CUTOFF)
                 docnii.close()

@@ -14,9 +14,9 @@ from glob import glob
 print("Hello.")
 
 # =============================================================================
-STUDY_PATH = "D:\\WB-MotionQuartet\\derivatives"
-SUBJ = ["sub-03", "sub-04", "sub-05", "sub-06", "sub-07", "sub-08", "sub-09", "sub-10"]
-TASK = ["amb"]
+STUDY_PATH = "E:\\WB-MotionQuartet\\derivatives"
+SUBJ = ["sub-07"]
+TASK = ["amb03"]
 
 for su in SUBJ:
     
@@ -24,7 +24,8 @@ for su in SUBJ:
     IA_TRX = glob(os.path.join(STUDY_PATH, su, 'func', 'BBR', '*IA.trf*'))[0]
     FA_TRX = glob(os.path.join(STUDY_PATH, su, 'func', 'BBR', '*BBR_FA.trf'))[0]
     PATH_IN = os.path.join(STUDY_PATH, su, 'func')
-
+    
+    #PATH_IN = os.path.join('F:\\Motion_Quartet_derivatives', '{}'.format(su), 'sess-03')
     PATH_OUT =  os.path.join(STUDY_PATH, su, 'func', 'VTC_native')
     
     if not os.path.exists(PATH_OUT):
@@ -45,7 +46,7 @@ for su in SUBJ:
                 doc_vmr = bv.open(VMR)
 
                 #// Input files
-                fmr_file = glob(os.path.join(path_run, 'topup','*_undist_fix.fmr'))[0]
+                fmr_file = glob(os.path.join(path_run, 'topup','*_undist_fix_THPGLMF3c.fmr'))[0]
                 coreg_fa_trf_file = FA_TRX
                 coreg_ia_trf_file = IA_TRX
                 

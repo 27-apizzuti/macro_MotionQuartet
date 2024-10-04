@@ -13,9 +13,9 @@ import subprocess
 import glob
 
 STUDY_PATH = "/mnt/d/WB-MotionQuartet"
-SUBJ = ["sub-01", "sub-03", "sub-04","sub-05","sub-06","sub-07","sub-08","sub-09","sub-10"]
+SUBJ = ["sub-09"]
 SESS = [3]
-TASK = ["phy", "amb", 'rest']
+TASK = ['amb02']
 
 for su in SUBJ:
     for iterse, se in enumerate(SESS):

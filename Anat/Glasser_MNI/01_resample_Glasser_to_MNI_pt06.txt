@@ -1,0 +1,6 @@
+Glasser atlas is in MNI space at 1 iso mm; we are working with MNI data at 0.6 iso mm. 
+ 
+1) Find TRX from MNI 1 iso -> MNI 0.6 
+	In ITK-SNAP, load MNI volume at 0.6 iso mm as main and MNI at 1 iso mm as secondary. Use 'registration' using centre of mass alignment. 	Find the TRX and save it.
+2) Apply TRX. In ITK-SNAP, load MNI volume at 0.6 iso mm as main and Glasser MNI 1 iso mm as secondary. Load TRX and apply it. Reslice using NN.
+

@@ -13,10 +13,10 @@ import subprocess
 import glob
 
 STUDY_PATH = "/mnt/d/WB-MotionQuartet/derivatives"
-SUBJ = ["sub-01", "sub-03", "sub-04","sub-05","sub-06"]
+SUBJ = ["sub-09"]  # sub-09 and sub-08 rest
 SESS = [3]
-TASK = ["phy", "amb", "rest"]
-
+TASK = ["amb03", "amb04"]
+# TASK = ["rest"]
 for su in SUBJ:
     for iterse, se in enumerate(SESS):
         print("Working on {} sess-{}".format(su, se))
