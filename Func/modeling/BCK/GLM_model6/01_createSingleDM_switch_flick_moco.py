@@ -53,9 +53,9 @@ for su in SUBJ:
         docVMR.set_predictor_values_from_condition("Switch", "Switch", 1)
         docVMR.apply_hrf_to_predictor("Switch")
 
-        docVMR.add_predictor("Flicker")
-        docVMR.set_predictor_values_from_condition("Flicker", "Flicker", 1)
-        docVMR.apply_hrf_to_predictor("Flicker")
+        docVMR.add_predictor("Baseline")
+        docVMR.set_predictor_values_from_condition("Baseline", "Baseline", 1)
+        docVMR.apply_hrf_to_predictor("Baseline")
 
         # include constant as last predictor
         docVMR.add_predictor("Constant")

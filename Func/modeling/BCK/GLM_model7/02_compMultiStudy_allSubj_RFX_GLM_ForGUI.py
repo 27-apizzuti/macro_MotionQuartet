@@ -14,7 +14,7 @@ print("Hello!")
 STUDY_PATH = 'E:\\WB-MotionQuartet\\derivatives'
 SUBJ = ['sub-01', 'sub-03', 'sub-04', 'sub-05', 'sub-06', 'sub-07', 'sub-08', 'sub-09', 'sub-10']
 TASKS = ['phy', 'amb']
-PATH_GLM = os.path.join(STUDY_PATH, 'GLM_model1')
+PATH_GLM = os.path.join(STUDY_PATH, 'GLM_model2')
 os.makedirs(PATH_GLM, exist_ok=True)
 
 for task in TASKS:
@@ -34,13 +34,13 @@ for task in TASKS:
         print('Adding VTC and SDM from {}'.format(su))
         # // Adding single subject DMs
         PATH_VTC = os.path.join(STUDY_PATH, su, 'func', 'VTC_MNI')
-        PATH_SDM = os.path.join(STUDY_PATH, su, 'func', 'GLM_model1', 'SDM')
+        PATH_SDM = os.path.join(STUDY_PATH, su, 'func', 'GLM_model2', 'SDM')
         if not os.path.exists(PATH_GLM):
             os.mkdir(PATH_GLM)
 
         for itrun in RUNS:
-            vtc_file = os.path.join(PATH_VTC, '{}_task-{}_run-0{}_acq-2depimb4_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native_bvbabel_resx1_float32_bvbabel_resx1_float32_MNI.vtc'.format(su, task, itrun))
-            sdm = os.path.join(PATH_SDM, '{}_{}0{}_2preds_MOCO.sdm'.format(su, task, itrun))
+            vtc_file = os.path.join(PATH_VTC, '{}_task-{}_run-0{}_acq-2depimb4_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native_bvbabel_resx1_float32_bvbabel_resx1_float32_MNI_SD3DVSS4.00mm.vtc'.format(su, task, itrun))
+            sdm = os.path.join(PATH_SDM, '{}_{}0{}_model2_MOCO.sdm'.format(su, task, itrun))
             doc.add_study_and_dm(vtc_file, sdm)
 
     doc.serial_correlation_correction_level = 2 # 1 -> AR(1), 2 -> AR(2)
@@ -49,7 +49,7 @@ for task in TASKS:
     doc.z_transform_studies_baseline_only = False
     doc.separate_subject_predictors = True
     doc.separate_study_predictors = False
-    doc.save_multistudy_glm_definition_file(os.path.join(PATH_GLM, 'AllSbj_{}_2preds_MOCO_PSC_SEPSTUDYPREDS_N-{}_FFX.mdm'.format(task, len(SUBJ))))
+    doc.save_multistudy_glm_definition_file(os.path.join(PATH_GLM, 'AllSbj_{}_model2_MOCO_PSC_SEPSTUDYPREDS_N-{}_RFX.mdm'.format(task, len(SUBJ))))
 
     print('Save MDM')
 #doc.compute_rfx_glm()

@@ -39,7 +39,7 @@ for task in TASKS:
             os.mkdir(PATH_GLM)
 
         for itrun in RUNS:
-            vtc_file = os.path.join(PATH_VTC, '{}_task-{}_run-0{}_acq-2depimb4_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native_bvbabel_resx1_float32_bvbabel_resx1_float32_MNI_SD3DVSS4.00mm.vtc'.format(su, task, itrun))
+            vtc_file = os.path.join(PATH_VTC, '{}_task-{}_run-0{}_acq-2depimb4_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native_bvbabel_resx1_float32_bvbabel_resx1_float32_MNI.vtc'.format(su, task, itrun))
             sdm = os.path.join(PATH_SDM, '{}_{}0{}_model2_MOCO.sdm'.format(su, task, itrun))
             doc.add_study_and_dm(vtc_file, sdm)
 
