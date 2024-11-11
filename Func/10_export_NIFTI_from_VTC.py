@@ -11,8 +11,8 @@ from glob import glob
 
 # Settings
 STUDY_PATH = '/mnt/e/WB-MotionQuartet/derivatives'
-SUB = ['sub-07']
-TASK = ['amb']
+SUB = ['sub-01', 'sub-03', 'sub-04', 'sub-05', 'sub-06', 'sub-07', 'sub-08', 'sub-09', 'sub-10']
+TASK = ['rest']
 
 for su in SUB:
     print('Working on {}'.format(su))
@@ -22,8 +22,8 @@ for su in SUB:
     header_vmr, data_vmr = bvbabel.vmr.read_vmr(FILE_VMR)
 
     for ta in TASK:
-        # VTC_list = glob(os.path.join(STUDY_PATH, su, 'func', 'VTC_native', '{}_task-{}_acq-2depimb4_*_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native.vtc'.format(su, ta)))
-        VTC_list = glob(os.path.join(STUDY_PATH, su, 'func', 'VTC_native', '{}_task-amb_acq-2depimb4_run-03_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native.vtc'.format(su)))
+        VTC_list = glob(os.path.join(STUDY_PATH, su, 'func', 'VTC_native', '{}_task-{}_acq-2depimb4_*_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native.vtc'.format(su, ta)))
+        # VTC_list = glob(os.path.join(STUDY_PATH, su, 'func', 'VTC_native', '{}_task-amb_acq-2depimb4_run-03_SCSTBL_3DMCTS_bvbabel_undist_fix_THPGLMF3c_BBR_native.vtc'.format(su)))
         for VTC_file in VTC_list:
 
             # Load VTC
