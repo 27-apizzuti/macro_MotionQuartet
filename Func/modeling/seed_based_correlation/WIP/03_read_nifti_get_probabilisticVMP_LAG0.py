@@ -12,13 +12,13 @@ TASKS = ['phy', 'rest', 'amb']
 LAG = 0
 
 for task in TASKS:
-
+    # --------------- Change folder SEED_CORR_BLOCK, SEED_CORR_SWITCH
     # Input file
-    SEED_CORR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_task-{}_MNI_seed_corr_avg_0_CORR_brainmask.nii.gz'.format(task, LAG))
-    SEED_CORR_THR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_task-{}_MNI_seed_corr_avg_0_PVAL_THR_brainmask.nii.gz'.format(task, LAG))
+    SEED_CORR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_task-{}_MNI_seed_corr_avg_0_CORR_brainmask.nii.gz'.format(task, LAG))
+    SEED_CORR_THR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_task-{}_MNI_seed_corr_avg_0_PVAL_THR_brainmask.nii.gz'.format(task, LAG))
 
-    REF_VMP = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_amb_task_conjunction_models_thre_4.vmp')
-
+    REF_VMP = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_amb_task_conjunction_models_thre_4.vmp')
+    # ---------------------
     # LAG0
     nii =  nb.load(SEED_CORR)
     seed_corr = np.asarray(nii.dataobj)
@@ -37,7 +37,6 @@ for task in TASKS:
     seed_corr[seed_corr < 0 ] = -1
     #
     seed_corr = np.sum(seed_corr, axis=-1)
-
 
     # Read VMP
     header, data = bvbabel.vmp.read_vmp(REF_VMP)

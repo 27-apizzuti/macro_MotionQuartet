@@ -10,9 +10,9 @@ ROIS = [2, 23, 156, 157]   # MST, MT, V4t, FST
 
 MODEL = 'model2'
 
-VMP_REF = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/AllSbj_conjunction_{}_thre_4.vmp".format(MODEL)
-GLASSER_FILE = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/seed_based_correlation/nifti/Glasser_MNI_bilateral_NATIVE_MANUAL_vmp_bvbabel.nii.gz"
-GROUP_MAP = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/seed_based_correlation/nifti/AllSbj_conjunction_{}_thre_4_bvbabel.nii.gz".format(MODEL)
+VMP_REF = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/AllSbj_amb_task_conjunction_models_thre_4.vmp"
+GLASSER_FILE = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/Glasser_MNI_bilateral_NATIVE_MANUAL_vmp_bvbabel.nii.gz"
+GROUP_MAP = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/AllSbj_amb_task_conjunction_models_thre_4_bvbabel.nii.gz"
 
 # =============================================================================
 # Load nifti
@@ -24,21 +24,24 @@ for roi in ROIS:
     idx_glasser = idx_glasser + (seg_glasser == roi) + (seg_glasser == (roi + 180))
 
 # Save SEED
-outname = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/seed_based_correlation/nifti/Glasser_MNI_bilateral_NATIVE_MANUAL_vmp_bvbabel_SEED_MT_plus.nii.gz"
+outname = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/Glasser_MNI_bilateral_NATIVE_MANUAL_vmp_bvbabel_SEED_MT_plus.nii.gz"
 img = nb.Nifti1Image(idx_glasser, affine=np.eye(4))
 nb.save(img, outname)
-
 
 # Find group-surviving voxels inside the seed-ROI
 nii =  nb.load(GROUP_MAP)
 group = np.asarray(nii.dataobj)
-idx = group > 1      # Value 2, 3 correspond to voxel's model 2 nning for ambiguous and ambiguous + physical
+
+if MODEL == 'model1':
+    idx = (group == 1)      # Value 1 --> voxels from the block model
+else:
+    idx = (group == 2)      # Value 2 --> voxels from the switch model
 
 # Voxel-mask
 idx_group = idx * idx_glasser
 
 # Save group voxels
-outname = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/seed_based_correlation/nifti/AllSbj_conjunction_model2_thre_4_bvbabel_SEED_MT_plus.nii.gz"
+outname = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/AllSbj_amb_SEED_MT_{}.nii.gz".format(MODEL)
 img = nb.Nifti1Image(idx_group, affine=np.eye(4))
 nb.save(img, outname)
 
@@ -69,6 +72,6 @@ new_vmp_header["Map"][2]["MapThreshold"] = np.min(new_vmp_data[..., 2])
 
 # Save VMP
 basename = VMP_REF.split(os.extsep, 1)[0]
-OUTNAME = "{}_SEED_MT_plus.vmp".format(basename, roi)
+OUTNAME = "{}_SEED_MT_plus_{}.vmp".format(basename, MODEL)
 bvbabel.vmp.write_vmp(OUTNAME, new_vmp_header, new_vmp_data)
 print("Finished.")

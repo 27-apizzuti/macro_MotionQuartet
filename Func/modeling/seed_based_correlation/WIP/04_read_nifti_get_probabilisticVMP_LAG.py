@@ -14,14 +14,14 @@ LAG = 3
 for task in TASKS:
 
     # Input file
-    SEED_CORR1 = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_task-{}_MNI_seed_corr_avg_-{}_CORR_brainmask.nii.gz'.format(task, LAG))
-    SEED_CORR1_THR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_task-{}_MNI_seed_corr_avg_-{}_PVAL_THR_brainmask.nii.gz'.format(task, LAG))
+    SEED_CORR1 = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_task-{}_MNI_seed_corr_avg_-{}_CORR_brainmask.nii.gz'.format(task, LAG))
+    SEED_CORR1_THR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_task-{}_MNI_seed_corr_avg_-{}_PVAL_THR_brainmask.nii.gz'.format(task, LAG))
 
-    SEED_CORR2 = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_task-{}_MNI_seed_corr_avg_{}_CORR_brainmask.nii.gz'.format(task, LAG))
-    SEED_CORR2_THR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_task-{}_MNI_seed_corr_avg_{}_PVAL_THR_brainmask.nii.gz'.format(task, LAG))
+    SEED_CORR2 = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_task-{}_MNI_seed_corr_avg_{}_CORR_brainmask.nii.gz'.format(task, LAG))
+    SEED_CORR2_THR = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_task-{}_MNI_seed_corr_avg_{}_PVAL_THR_brainmask.nii.gz'.format(task, LAG))
 
-    REF_VMP = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR', 'AllSbj_amb_task_conjunction_models_thre_4.vmp')
-
+    REF_VMP = os.path.join(STUDY_PATH, 'GroupStat', 'SEED_CORR_SWITCH', 'AllSbj_amb_task_conjunction_models_thre_4.vmp')
+# --------------------------------------------------------------------------------
     # LAG -2 // Pushing back the seed time series means that this ROI is FOLLOWING
     nii =  nb.load(SEED_CORR1)
     seed_corr1 = np.asarray(nii.dataobj)

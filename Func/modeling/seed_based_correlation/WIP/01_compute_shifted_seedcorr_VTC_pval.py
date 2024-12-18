@@ -15,7 +15,7 @@ LAGS = [-3, -2, -1, 0, 1, 2, 3]      # seconds
 TASKS = ['amb', 'phy', 'rest']
 
 STUDY_PATH = "/mnt/e/WB-MotionQuartet/derivatives"
-VMP_REF = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/SEED_CORR/AllSbj_conjunction_{}_thre_4_SEED_MT_plus.vmp".format(MODEL)
+VMP_REF = "/mnt/e/WB-MotionQuartet/derivatives/GroupStat/SEED_CORR_SWITCH/AllSbj_amb_task_conjunction_models_thre_4_SEED_MT_plus_{}.vmp".format(MODEL)
 
 # Load nifti to take the header
 NIFTI_REF = "/mnt/e/WB-MotionQuartet/derivatives/MNI_ICBM152_T1_NLIN_ASYM_09c_BRAIN_ISO1pt8_bvbabel_brainmask.nii.gz"
@@ -40,7 +40,7 @@ for TASK in TASKS:
 
         for su in SUBJ:
             PATH_VTC = os.path.join(STUDY_PATH, su, 'func', 'VTC_MNI')
-            PATH_OUT = os.path.join(STUDY_PATH, su, 'func', 'SEED_CORR')
+            PATH_OUT = os.path.join(STUDY_PATH, su, 'func', 'SEED_CORR_SWITCH')
 
             if not os.path.exists(PATH_OUT):
                 os.mkdir(PATH_OUT)

@@ -10,6 +10,7 @@ STUDY_PATH = "/mnt/e/WB-MotionQuartet/derivatives/"
 MODELS = ['GLM_model1', 'GLM_model2']
 THRESHOLD = 4
 VOLUME = 10    # number of voxels (1.8 iso mm)
+COVERAGE = 10
 
 # Load Glasser VMP
 VMP =  os.path.join(STUDY_PATH, 'Glasser_atlas', 'alignment-BV-template_6pt', 'Glasser_MNI_bilateral_NATIVE_MANUAL.vmp')
@@ -54,10 +55,12 @@ for it, model_type in enumerate(MODELS):
         count_both = np.sum((data[idx_roi] == 3))
         if roi == 203:
             print('ROI {} has {} voxels, phy {} amb {} both {}'.format(roi, roi_volume, count_phy, count_amb, count_both))
+        
+        if (count_phy > VOLUME):
+            if ((count_phy/count_phy)*100 > COVERAGE):
+                roi_name_phy.append(roi)
+                roi_name_phy_count.append(count_phy)
 
-        if count_phy > VOLUME:
-            roi_name_phy.append(roi)
-            roi_name_phy_count.append(count_phy)
         if count_amb > VOLUME:
             roi_name_amb.append(roi)
             roi_name_amb_count.append(count_amb)
@@ -79,7 +82,7 @@ for it, model_type in enumerate(MODELS):
 
     # Save dictionary as an .npz file
     print('Save dictionary {}'.format(model_type))
-    out = os.path.join(STUDY_PATH, 'GroupStat', 'AllSbj_conjunction_model{}_thre_{}_dictionaryROI_{}_vox.npz'.format(it+1, THRESHOLD, VOLUME))
+    out = os.path.join(STUDY_PATH, 'GroupStat', 'AllSbj_conjunction_model{}_thre_{}_dictionaryROI_{}_vox_COVERAGE.npz'.format(it+1, THRESHOLD, VOLUME))
     np.savez(out, **ROI_dict)
 
 print("Finished.")

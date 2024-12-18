@@ -7,9 +7,10 @@ import bvbabel
 from pprint import pprint
 
 STUDY_PATH = "/mnt/e/WB-MotionQuartet/derivatives/"
-TASKS = ['amb', 'phy']
+TASKS = ['amb']
 THRESHOLD = 4
 VOLUME = 10    # number of voxels (1.8 iso mm)
+COVERAGE = 5
 
 # Load Glasser VMP
 VMP =  os.path.join(STUDY_PATH, 'Glasser_atlas', 'alignment-BV-template_6pt', 'Glasser_MNI_bilateral_NATIVE_MANUAL.vmp')
@@ -58,15 +59,20 @@ for it, task_type in enumerate(TASKS):
             print('ROI {} has {} voxels, phy {} amb {} both {}'.format(roi, roi_volume, count_1, count_2, count_both))
 
         if count_1 > VOLUME:
-            roi_name_m1.append(roi)
-            roi_name_m1_count.append(count_1)
+            if ((count_1/roi_volume)*100 > COVERAGE):
+                print((count_1/roi_volume)*100)
+                print(count_1)
+                roi_name_m1.append(roi)
+                roi_name_m1_count.append(count_1)
         if count_2 > VOLUME:
-            roi_name_m2.append(roi)
-            roi_name_m2_count.append(count_2)
+            if ((count_2/roi_volume)*100 > COVERAGE):
+                roi_name_m2.append(roi)
+                roi_name_m2_count.append(count_2)
 
         if count_both > VOLUME:
-            roi_name_both.append(roi)
-            roi_name_both_count.append(count_both)
+            if ((count_both/roi_volume)*100 > COVERAGE):
+                roi_name_both.append(roi)
+                roi_name_both_count.append(count_both)
 
     # Add ROI list to each category
     ROI_dict['Model1_pref'] = roi_name_m1
@@ -81,7 +87,7 @@ for it, task_type in enumerate(TASKS):
 
     # Save dictionary as an .npz file
     print('Save dictionary {}'.format(task_type))
-    out = os.path.join(STUDY_PATH, 'GroupStat', 'AllSbj_{}_task_conjunction_models_thre_{}_dictionaryROI_{}_vox.npz'.format(task_type, THRESHOLD, VOLUME))
+    out = os.path.join(STUDY_PATH, 'GroupStat', 'AllSbj_{}_task_conjunction_models_thre_{}_dictionaryROI_{}_vox_COVERAGE.npz'.format(task_type, THRESHOLD, VOLUME))
     np.savez(out, **ROI_dict)
 
 print("Finished.")
