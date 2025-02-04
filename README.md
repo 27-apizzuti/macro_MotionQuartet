@@ -1,4 +1,4 @@
-# Bistable Motion Quartet fMRI project at 7T - macroscale, whole brainmodeling 
+# Bistable Motion Quartet fMRI project at 7T - macroscale, whole brain modeling 
 This repository contains the analysis pipeline used for 7T fMRI for the paper "In the brain of the beholder: whole brain dynamics shape the perception during ambiguous motion".
 
 # Core dependences
